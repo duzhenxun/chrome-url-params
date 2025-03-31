@@ -13,6 +13,26 @@
       margin: 0 auto;
       padding: 20px;
     }
+    .new-features {
+      margin-top: 25px;
+      margin-bottom: 30px;
+    }
+    .new-features h3 {
+      color: #2c3e50;
+      border-bottom: 2px solid #e74c3c;
+      padding-bottom: 8px;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .highlight {
+      border-left: 4px solid #e74c3c;
+      background-color: #f9f9f9;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .highlight:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
     .header {
       text-align: center;
       margin-bottom: 30px;
@@ -20,6 +40,32 @@
     .header img {
       vertical-align: middle;
       margin-right: 10px;
+    }
+    .download-links {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .download-btn, .github-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .download-btn {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .github-btn {
+      background-color: #333;
+      color: white;
+    }
+    .download-btn:hover, .github-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     .section {
       margin-bottom: 30px;
@@ -109,14 +155,35 @@
 </head>
 <body>
   <div class="header">
-    <h1><img src="images/icon48.png" alt="快测宝图标"> 快测宝v1.0.2(API快测)</h1>
-    <p>专业的API接口测试浏览器插件  <span>  <a href="https://chromewebstore.google.com/detail/%E5%BF%AB%E6%B5%8B%E5%AE%9Dapi%E6%89%B9%E9%87%8F%E6%B5%8B%E8%AF%95url%E6%89%B9%E9%87%8F%E8%AF%B7%E6%B1%82/mpelokhmlpcomhgknojilmgcjedehgdo" target="_blank">下载安装</a></span></p>
-    
+    <h1><img src="images/icon48.png" alt="快测宝图标"> 快测宝 - API接口测试工具</h1>
+    <p>专业的API接口测试浏览器插件</p>
+    <div class="download-links">
+      <a href="https://chromewebstore.google.com/detail/mpelokhmlpcomhgknojilmgcjedehgdo?utm_source=item-share-cb" target="_blank" class="download-btn">Chrome应用商店安装</a>
+      <a href="https://github.com/duzhenxun/chrome-url-params" target="_blank" class="github-btn">GitHub源码仓库</a>
+    </div>
   </div>
 
   <div class="section">
     <h2>产品介绍</h2>
-    <p>快测宝是一款专为API接口请求测试打造的批量请求浏览器插件，支持批量请求URL，您可根据具体测试需求灵活设置各种参数。无论您是专业开发人员还是测试工程师，它都将成为您API接口测试的得力助手，助您更快速、准确地完成测试任务。</p>
+    <p>快测宝是一款专为API接口请求测试打造的批量请求浏览器插件，提供开发人员和测试工程师高效的URL参数管理和编辑功能。无论您是专业开发人员还是测试工程师，快测宝都将成为您API接口测试的得力助手，助您更快速、准确地完成测试任务。</p>
+
+    <div class="new-features">
+      <h3>核心功能</h3>
+      <div class="feature-grid">
+        <div class="feature-item highlight">
+          <div class="feature-title">URL参数解析</div>
+          <p>智能识别并解析URL中的所有参数，直观展示参数名称、值及类型，支持复杂URL结构的解析。</p>
+        </div>
+        <div class="feature-item highlight">
+          <div class="feature-title">URL参数对比</div>
+          <p>支持多个URL之间的参数对比，高亮显示参数差异，帮助您快速发现不同环境或版本间的参数变化。</p>
+        </div>
+        <div class="feature-item highlight">
+          <div class="feature-title">URL参数管理器</div>
+          <p>集成式的参数管理工具，支持添加、编辑、删除参数，并实时预览生成的新URL，提高开发和测试效率。</p>
+        </div>
+      </div>
+    </div>
     
     <div class="feature-grid">
       <div class="feature-item">
@@ -138,6 +205,10 @@
       <div class="feature-item">
         <div class="feature-title">历史记录</div>
         <p>自动保存测试历史，方便快速复用之前的测试配置。</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-title">多语言支持</div>
+        <p>支持中英文切换，满足不同语言习惯用户的需求。</p>
       </div>
       <div class="feature-item">
         <div class="feature-title">多主题</div>
@@ -290,7 +361,12 @@
   </div>
 
   <div class="footer">
-    <p>快测宝 - API接口批量测试工具</p>
+    <p>快测宝 - API接口测试工具</p>
+    <p>
+      <a href="https://github.com/duzhenxun/chrome-url-params" target="_blank">GitHub源码仓库</a> | 
+      <a href="https://chromewebstore.google.com/detail/mpelokhmlpcomhgknojilmgcjedehgdo?utm_source=item-share-cb" target="_blank">Chrome应用商店</a>
+    </p>
+    <p>© 2025 duzhenxun - 所有权利均保留</p>
   </div>
 </body>
 </html>
