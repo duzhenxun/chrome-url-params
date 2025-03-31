@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>快测宝,API批量测试,URL批量请求</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header-container">
+      <h1><img src="images/icon48.png" alt="批量请求工具">快测宝 v1.0.2</h1>
+      <div id="currentTime">当前时间</div>
+    </div>
+
+    <div>
+      <!-- <label for="urlPattern">API (请求时会自动替换指定参数的值)</label> -->
+      <div class="url-input-container">
+        <textarea id="urlPattern" class="url-input" placeholder="请输入您要测试的Api地址"></textarea>
+        <div class="url-controls">
+          <button id="getCurrentUrl" class="icon-button" title="获取当前页面URL">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+            </svg>
+          </button>
+          <button id="pasteUrl" class="icon-button" title="粘贴URL">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+              <path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="urlParams" style="display: none;"> </div>
+
+    </div>
+        <div class="history-container">
+          <select class="history-select" id="historySelect">
+            <option value="" disabled selected>选择历史记录</option>
+          </select>
+          <button class="clear-button" id="clearHistory">清空</button>
+        </div>
+
+    <div class="batch-container">
+      <div class="batch-header">
+        <span class="batch-toggle">▼</span>
+        <span class="batch-title">更多功能设置</span>
+      </div>
+      <div class="batch-content collapsed">
+       
+        <div class="input-row">
+          <div class="input-group">
+            <label for="paramName">参数</label>
+            <input type="text" id="paramName" value="uid">
+          </div>
+          <div class="input-group">
+            <label for="concurrency">并发</label>
+            <input type="number" id="concurrency" value="5" min="1" max="10">
+          </div>
+          <div class="input-group">
+            <label for="theme-selector">主题</label>
+            <select id="theme">
+              <option value="mint">绿色</option>
+              <option value="light">明亮</option>
+              <option value="colorful">彩色</option>
+              <option value="deep-blue">深蓝</option>
+              <option value="pink">粉色</option>
+            </select>      
+          </div>
+        </div>
+        <div class="batch">
+          <label for="uidInput">批量参数值 (支持逗号分隔、换行符或范围格式如10000-10010)</label>
+          <textarea id="uidInput" placeholder="例如:10001,10002,10003或10000-10010"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <button id="startRequest">开始请求</button>
+    <div id="results" class="result-container"></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
