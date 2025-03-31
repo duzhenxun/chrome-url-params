@@ -1,0 +1,5 @@
+{
+  "version": "1.0.4",
+  "updateUrl": "https://github.com/YOUR_USERNAME/chrome-url-params/releases",
+  "releaseNotes": "新增功能：\n- 自动检测版本升级\n- 多语言切换支持\n- 从manifest.json动态获取版本号"
+}
