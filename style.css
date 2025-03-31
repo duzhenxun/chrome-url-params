@@ -764,13 +764,98 @@
         align-items: center;
         gap: 12px;
         margin-bottom: 5px;
-        justify-content: center;
+        justify-content: space-between;
+    }
+    
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .language-selector {
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid var(--border-color);
+        background-color: var(--input-bg);
+        font-size: 12px;
+        cursor: pointer;
+        color: var(--text-color);
     }
 
     #currentTime {
         font-size: 12px;
         color: var(--text-color);
         opacity: 0.8;
+    }
+    
+    /* 版本更新通知样式 */
+    .update-notification {
+        background-color: var(--hover-color);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .update-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+    
+    .release-notes {
+        margin-top: 8px;
+        padding: 8px;
+        background-color: var(--bg-color);
+        border-radius: 4px;
+        font-size: 12px;
+        border-left: 3px solid var(--primary-color);
+    }
+    
+    .release-notes h4 {
+        margin: 0 0 5px 0;
+        font-size: 13px;
+        color: var(--primary-color);
+    }
+    
+    .update-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 5px;
+    }
+    
+    .update-button {
+        padding: 5px 10px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        font-size: 12px;
+        background-color: var(--primary-color);
+        color: var(--button-text-color, white);
+    }
+    
+    .update-button.secondary {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+    }
+    
+    .close-update {
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        color: var(--text-color);
+        opacity: 0.6;
+        padding: 0 5px;
     }
 
     #paramName {

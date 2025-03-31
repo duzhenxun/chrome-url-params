@@ -1,4 +1,21 @@
-document.addEventListener('DOMContentLoaded', function() {
+// 导入语言管理器和版本检查器
+import languageManager from './languages/language-manager.js';
+import versionChecker from './version-checker.js';
+
+document.addEventListener('DOMContentLoaded', async function() {
+  // 初始化语言管理器和版本检查器
+  await languageManager.init();
+  await versionChecker.init();
+  
+  // 应用当前语言
+  applyLanguage();
+  
+  // 从manifest.json获取版本号并显示在页面上
+  const appVersion = document.getElementById('appVersion');
+  if (appVersion) {
+    const manifestVersion = chrome.runtime.getManifest().version;
+    appVersion.textContent = 'v' + manifestVersion;
+  }
   // 初始化批量参数区域的折叠状态
   const batchHeader = document.querySelector('.batch-header');
   const batchToggle = document.querySelector('.batch-toggle');
@@ -140,6 +157,64 @@ document.addEventListener('DOMContentLoaded', function() {
     const savedTheme = result.theme || 'mint';
     themeSelect.value = savedTheme;
     setTheme(savedTheme);
+  });
+  
+  // 语言选择器初始化
+  const languageSelector = document.getElementById('languageSelector');
+  if (languageSelector) {
+    languageSelector.value = languageManager.currentLanguage;
+    
+    // 监听语言切换
+    languageSelector.addEventListener('change', async function(e) {
+      const newLanguage = e.target.value;
+      await languageManager.switchLanguage(newLanguage);
+      applyLanguage();
+    });
+  }
+  
+  // 初始化版本更新通知
+  const updateNotification = document.getElementById('updateNotification');
+  const updateMessage = document.getElementById('updateMessage');
+  const updateNowBtn = document.getElementById('updateNow');
+  const laterUpdateBtn = document.getElementById('laterUpdate');
+  const closeUpdateBtn = document.getElementById('closeUpdate');
+  
+  // 监听版本更新事件
+  document.addEventListener('versionUpdate', function(e) {
+    const { newVersion, updateUrl, currentVersion, releaseNotes } = e.detail;
+    
+    // 更新通知消息
+    updateMessage.innerHTML = `${languageManager.getText('newVersionAvailable')}: v${currentVersion} → v${newVersion}`;
+    
+    // 如果有发布说明，显示它
+    if (releaseNotes) {
+      const notesElement = document.createElement('div');
+      notesElement.className = 'release-notes';
+      // 将换行符替换为<br>标签
+      const formattedNotes = releaseNotes.split('\n').join('<br>');
+      notesElement.innerHTML = `<h4>更新内容:</h4><div>${formattedNotes}</div>`;
+      updateMessage.appendChild(notesElement);
+    }
+    
+    updateNotification.style.display = 'flex';
+    
+    // 点击立即更新
+    updateNowBtn.textContent = languageManager.getText('updateNow');
+    updateNowBtn.onclick = function() {
+      chrome.tabs.create({ url: updateUrl || `https://github.com/${versionChecker.githubRepo}/releases/latest` });
+      updateNotification.style.display = 'none';
+    };
+    
+    // 点击稍后提醒
+    laterUpdateBtn.textContent = languageManager.getText('laterUpdate');
+    laterUpdateBtn.onclick = function() {
+      updateNotification.style.display = 'none';
+    };
+    
+    // 点击关闭
+    closeUpdateBtn.onclick = function() {
+      updateNotification.style.display = 'none';
+    };
   });
 
   // 监听主题切换
@@ -955,4 +1030,67 @@ document.addEventListener('DOMContentLoaded', function() {
   } else {
     console.error('找不到开始请求按钮');
   }
+  
+  // 手动检查更新
+  setTimeout(() => {
+    versionChecker.manualCheck();
+  }, 1000);
 });
+
+// 应用当前语言
+function applyLanguage() {
+  const lang = languageManager.getCurrentLanguage();
+  
+  // 更新所有需要翻译的元素
+  document.getElementById('currentTime').textContent = lang.currentTime || '当前时间';
+  document.getElementById('urlPattern').placeholder = lang.urlPlaceholder || '请输入您要测试的Api地址';
+  document.getElementById('getCurrentUrl').title = lang.getCurrentUrl || '获取当前页面URL';
+  document.getElementById('pasteUrl').title = lang.pasteUrl || '粘贴URL';
+  
+  const historySelect = document.getElementById('historySelect');
+  if (historySelect && historySelect.options[0]) {
+    historySelect.options[0].textContent = lang.historySelect || '选择历史记录';
+  }
+  
+  document.getElementById('clearHistory').textContent = lang.clearHistory || '清空';
+  document.querySelector('.batch-title').textContent = lang.moreSettings || '更多功能设置';
+  
+  const paramLabels = document.querySelectorAll('label[for="paramName"]');
+  paramLabels.forEach(label => {
+    label.textContent = lang.paramLabel || '参数';
+  });
+  
+  const concurrencyLabels = document.querySelectorAll('label[for="concurrency"]');
+  concurrencyLabels.forEach(label => {
+    label.textContent = lang.concurrencyLabel || '并发';
+  });
+  
+  const themeLabels = document.querySelectorAll('label[for="theme-selector"]');
+  themeLabels.forEach(label => {
+    label.textContent = lang.themeLabel || '主题';
+  });
+  
+  // 更新主题选项
+  const themeSelect = document.getElementById('theme');
+  if (themeSelect) {
+    Array.from(themeSelect.options).forEach(option => {
+      const themeKey = `theme${option.value.charAt(0).toUpperCase() + option.value.slice(1)}`;
+      option.textContent = lang[themeKey] || option.textContent;
+    });
+  }
+  
+  // 更新批量参数标签
+  const batchLabel = document.querySelector('label[for="uidInput"]');
+  if (batchLabel) {
+    batchLabel.textContent = lang.batchParamsLabel || '批量参数值 (支持逗号分隔、换行符或范围格式如10000-10010)';
+  }
+  
+  // 更新批量参数输入框占位符
+  const uidInput = document.getElementById('uidInput');
+  if (uidInput) {
+    uidInput.placeholder = lang.batchParamsPlaceholder || '例如:10001,10002,10003或10000-10010';
+  }
+  
+  // 更新开始请求按钮
+  document.getElementById('startRequest').textContent = lang.startRequest || '开始请求';
+}
