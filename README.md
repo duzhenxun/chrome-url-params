@@ -1,4 +1,4 @@
-# 快测宝 - API接口测试工具
+# 快测宝 - 浏览器插件，API接口批量测试,URL参数编辑器
 
 [English Version](README_EN.md) | 中文版
 

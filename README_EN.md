@@ -1,4 +1,4 @@
-# QuickTest - API Testing Tool
+# QuickTest - API Testing Tool,URL Parameter Editing
 
 English | [中文版](README.md)
 

@@ -1,0 +1,25 @@
+# 排除所有 .zip 文件
+*.zip
+
+# 排除 macOS 系统文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 排除编辑器临时文件
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.sublime-*
+
+# 排除日志文件
+*.log
+
+# 排除依赖目录
+node_modules/
