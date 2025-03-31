@@ -3,7 +3,7 @@
   "name": "快测宝-API测试,URL批量请求,url参数编辑,URL Params Editor,url参数查询，",
   "author": "zhenxundu",
   "description": "快测宝是一款API接口测试工具，支持URL Params Editor,url参数查询，url参数编辑，你可灵活设置各种参数，支持批量请求，历史记录，主题切换，无论你是专业开发人员还是测试工程师，它都将成为你API接口测试的得力助手，助你更快速、准确地完成测试任务。",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -24,5 +24,8 @@
   ],
   "host_permissions": [
     "<all_urls>"
-  ]
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }

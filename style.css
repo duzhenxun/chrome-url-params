@@ -802,6 +802,26 @@
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
+    /* 新版本标记样式 */
+    .new-version-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: #ff4d4f;
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
+        padding: 2px 4px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        display: none; /* 默认隐藏 */
+    }
+    
+    .app-icon-container {
+        position: relative;
+        display: inline-block;
+    }
+    
     .update-content {
         flex: 1;
         display: flex;

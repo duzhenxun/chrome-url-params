@@ -1,5 +1,5 @@
 {
-  "version": "1.0.4",
-  "updateUrl": "https://github.com/YOUR_USERNAME/chrome-url-params/releases",
-  "releaseNotes": "新增功能：\n- 自动检测版本升级\n- 多语言切换支持\n- 从manifest.json动态获取版本号"
+  "version": "1.0.0",
+  "updateUrl": "https://github.com/zhenxundu/chrome-url-params/releases",
+  "releaseNotes": "主要功能：\n- 多语言支持：新增中文和英文界面切换功能\n- 版本自动检测：通过 GitHub API 自动检测新版本\n- URL 参数编辑：支持批量编辑和测试 URL 参数\n- 历史记录：自动保存历史请求记录\n- 主题切换：支持明暗两种主题模式"
 }

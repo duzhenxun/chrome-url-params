@@ -44,6 +44,11 @@ class LanguageManager {
     return this.languages[this.currentLanguage];
   }
 
+  // 获取当前语言代码
+  getCurrentLanguageCode() {
+    return this.currentLanguage;
+  }
+
   // 获取翻译文本
   getText(key) {
     const lang = this.getCurrentLanguage();

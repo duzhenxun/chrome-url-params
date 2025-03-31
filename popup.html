@@ -8,7 +8,10 @@
 <body>
   <div class="container">
     <div class="header-container">
-      <h1><img src="images/icon48.png" alt="批量请求工具">快测宝 <span id="appVersion">v1.0.0</span></h1>
+      <h1>
+        <img src="images/icon48.png" alt="批量请求工具" id="appIcon">
+        <span id="appTitle">快测宝</span> <span id="appVersion">v1.0.0</span>
+      </h1>
       <div class="header-right">
         <select id="languageSelector" class="language-selector">
           <option value="zh-CN">中文</option>
@@ -21,11 +24,12 @@
     <!-- 版本更新通知 -->
     <div id="updateNotification" class="update-notification" style="display: none;">
       <div class="update-content">
+          <div class="update-actions">
+            <button id="updateNow" class="update-button">立即更新</button>
+            <button id="laterUpdate" class="update-button secondary">稍后提醒</button>
+          </div>
         <span id="updateMessage"></span>
-        <div class="update-actions">
-          <button id="updateNow" class="update-button">立即更新</button>
-          <button id="laterUpdate" class="update-button secondary">稍后提醒</button>
-        </div>
+      
       </div>
       <button id="closeUpdate" class="close-update">×</button>
     </div>

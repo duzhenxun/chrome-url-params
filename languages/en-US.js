@@ -8,13 +8,13 @@ const en_US = {
   historySelect: "Select history record",
   clearHistory: "Clear",
   moreSettings: "More Settings",
-  paramLabel: "Parameter",
-  concurrencyLabel: "Concurrency",
+  paramLabel: "Param",
+  concurrencyLabel: "Conc",
   themeLabel: "Theme",
   themeMint: "Mint",
   themeLight: "Light",
   themeColorful: "Colorful",
-  themeDeepBlue: "Deep Blue",
+  themeDeepBlue: "Blue",
   themePink: "Pink",
   batchParamsLabel: "Batch parameter values (supports comma separation, line breaks, or range format like 10000-10010)",
   batchParamsPlaceholder: "Example: 10001,10002,10003 or 10000-10010",
@@ -24,7 +24,10 @@ const en_US = {
   updateNow: "Update Now",
   laterUpdate: "Remind Later",
   updateSuccess: "Update Success",
-  copySuccess: "Copied Successfully"
+  copySuccess: "Copied Successfully",
+  addParam: "Add Parameter",
+  searchParamsPlaceholder: "Search parameters...",
+  appIconAlt: "Batch Request Tool"
 };
 
 export default en_US;

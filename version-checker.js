@@ -4,7 +4,7 @@ class VersionChecker {
     this.currentVersion = chrome.runtime.getManifest().version;
     this.lastCheckTime = 0;
     this.checkInterval = 24 * 60 * 60 * 1000; // 24小时检查一次
-    this.githubRepo = 'zhenxundu/chrome-url-params'; // 替换为您的GitHub用户名和仓库名
+    this.githubRepo = 'duzhenxun/chrome-url-params'; // 替换为您的GitHub用户名和仓库名
     this.githubApiUrl = `https://api.github.com/repos/${this.githubRepo}/releases/latest`; // GitHub API接口
   }
 

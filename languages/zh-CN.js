@@ -24,7 +24,10 @@ const zh_CN = {
   updateNow: "立即更新",
   laterUpdate: "稍后提醒",
   updateSuccess: "更新成功",
-  copySuccess: "复制成功"
+  copySuccess: "复制成功",
+  addParam: "添加参数",
+  searchParamsPlaceholder: "模糊搜索参数...",
+  appIconAlt: "批量请求工具"
 };
 
 export default zh_CN;

@@ -162,7 +162,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   // 语言选择器初始化
   const languageSelector = document.getElementById('languageSelector');
   if (languageSelector) {
-    languageSelector.value = languageManager.currentLanguage;
+    // 使用getter方法获取当前语言代码
+    languageSelector.value = languageManager.getCurrentLanguageCode();
     
     // 监听语言切换
     languageSelector.addEventListener('change', async function(e) {
@@ -183,6 +184,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   document.addEventListener('versionUpdate', function(e) {
     const { newVersion, updateUrl, currentVersion, releaseNotes } = e.detail;
     
+    
     // 更新通知消息
     updateMessage.innerHTML = `${languageManager.getText('newVersionAvailable')}: v${currentVersion} → v${newVersion}`;
     
@@ -201,6 +203,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 点击立即更新
     updateNowBtn.textContent = languageManager.getText('updateNow');
     updateNowBtn.onclick = function() {
+      // 清除插件图标上的NEW标记
+      chrome.runtime.sendMessage({ action: 'clearBadge' });
+      
+      // 打开更新页面
       chrome.tabs.create({ url: updateUrl || `https://github.com/${versionChecker.githubRepo}/releases/latest` });
       updateNotification.style.display = 'none';
     };
@@ -208,11 +214,15 @@ document.addEventListener('DOMContentLoaded', async function() {
     // 点击稍后提醒
     laterUpdateBtn.textContent = languageManager.getText('laterUpdate');
     laterUpdateBtn.onclick = function() {
+      // 保留插件图标上的NEW标记，只隐藏通知框
       updateNotification.style.display = 'none';
     };
     
     // 点击关闭
     closeUpdateBtn.onclick = function() {
+      // 清除插件图标上的NEW标记
+      chrome.runtime.sendMessage({ action: 'clearBadge' });
+      
       updateNotification.style.display = 'none';
     };
   });
@@ -241,7 +251,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       const searchInput = document.createElement('input');
       searchInput.type = 'text';
       searchInput.className = 'param-search';
-      searchInput.placeholder = '模糊搜索参数...';
+      searchInput.placeholder = languageManager.getText('searchParamsPlaceholder');
       
       // 创建自定义下拉提示框
       const suggestionsDropdown = document.createElement('div');
@@ -316,7 +326,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       // 添加新增参数按钮
       const addParamButton = document.createElement('button');
       addParamButton.className = 'add-param-button';
-      addParamButton.innerHTML = '添加参数';
+      addParamButton.innerHTML = languageManager.getText('addParam');
       addParamButton.addEventListener('click', () => {
         const paramDiv = createParamItem('', '');
         urlParamsContainer.insertBefore(paramDiv, paramsContainer);
@@ -434,7 +444,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       // 添加新增参数按钮
       const addParamButton = document.createElement('button');
       addParamButton.className = 'add-param-button';
-      addParamButton.innerHTML = '添加参数';
+      addParamButton.innerHTML = languageManager.getText('addParam');
       addParamButton.addEventListener('click', () => {
         const paramDiv = createParamItem('', '');
         urlParamsContainer.insertBefore(paramDiv, paramsContainer);
@@ -493,17 +503,17 @@ document.addEventListener('DOMContentLoaded', async function() {
     keyInput.type = 'text';
     keyInput.className = 'param-name-input';
     keyInput.value = key;
-    keyInput.placeholder = '参数名';
+    keyInput.placeholder = 'name';
     
     const valueInput = document.createElement('input');
     valueInput.type = 'text';
     valueInput.className = 'param-value';
     valueInput.value = value;
-    valueInput.placeholder = '参数值';
+    valueInput.placeholder = 'value';
     
     const deleteButton = document.createElement('button');
     deleteButton.className = 'delete-param-button';
-    deleteButton.innerHTML = '删除';
+    deleteButton.innerHTML = '×'; // Unicode for multiplication sign (×)
     
     paramDiv.appendChild(keyInput);
     paramDiv.appendChild(document.createTextNode(' = '));
@@ -1042,6 +1052,18 @@ function applyLanguage() {
   const lang = languageManager.getCurrentLanguage();
   
   // 更新所有需要翻译的元素
+  // 更新应用标题
+  const appTitle = document.getElementById('appTitle');
+  if (appTitle) {
+    appTitle.textContent = lang.appName ? lang.appName.split('-')[0] : '快测宝';
+  }
+  
+  // 更新图标alt属性
+  const appIcon = document.getElementById('appIcon');
+  if (appIcon) {
+    appIcon.alt = lang.appIconAlt || '批量请求工具';
+  }
+  
   document.getElementById('currentTime').textContent = lang.currentTime || '当前时间';
   document.getElementById('urlPattern').placeholder = lang.urlPlaceholder || '请输入您要测试的Api地址';
   document.getElementById('getCurrentUrl').title = lang.getCurrentUrl || '获取当前页面URL';
@@ -1074,7 +1096,9 @@ function applyLanguage() {
   const themeSelect = document.getElementById('theme');
   if (themeSelect) {
     Array.from(themeSelect.options).forEach(option => {
-      const themeKey = `theme${option.value.charAt(0).toUpperCase() + option.value.slice(1)}`;
+      // 处理带连字符的主题值，如'deep-blue' -> 'DeepBlue'
+      const themeValue = option.value.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+      const themeKey = `theme${themeValue.charAt(0).toUpperCase() + themeValue.slice(1)}`;
       option.textContent = lang[themeKey] || option.textContent;
     });
   }
