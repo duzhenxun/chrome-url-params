@@ -104,6 +104,11 @@ class VersionChecker {
       } 
     });
     document.dispatchEvent(updateEvent);
+
+    // 更新扩展图标
+    chrome.action.setBadgeText({ text: '↑'});
+    chrome.action.setBadgeTextColor({ color: '#000000' });
+    chrome.action.setBadgeBackgroundColor({ color: '#FFCC00' });
   }
 
   // 手动检查更新
