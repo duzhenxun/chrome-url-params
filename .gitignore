@@ -9,7 +9,7 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-
+build/
 # 排除编辑器临时文件
 *.swp
 *.swo
