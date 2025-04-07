@@ -1,4 +1,4 @@
-    :root {
+:root {
         --bg-color: #f0f7f4;
         --text-color: #2d4a43;
         --border-color: #88c2b5;
@@ -787,6 +787,33 @@
         font-size: 12px;
         color: var(--text-color);
         opacity: 0.8;
+    }
+
+    .footer {
+        margin-top: 16px;
+        text-align: center;
+        padding: 12px 0;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .github-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        color: var(--text-color);
+        text-decoration: none;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+
+    .github-link:hover {
+        background-color: var(--hover-color);
+        color: var(--primary-color);
+    }
+
+    .github-link svg {
+        stroke: currentColor;
     }
     
     /* 版本更新通知样式 */
